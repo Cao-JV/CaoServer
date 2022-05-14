@@ -30,13 +30,46 @@
 #include <stdio.h>
 #include<iostream>
 #include <string>
-
+#include "ANSITerminal.hpp"
 
 using std::cout;
 using std::endl;
 using std::string;
+
 /*
  * 
  */
+
+
 int main(int argc, char** argv) {
+    std::locale::global(std::locale(""));    
+    Simple::IO::ANSITerminal terminal(true, "");
+    string title = "CaoS v0.01ab";
+    int  X
+        ,Y = 1;
+    terminal.ClearScreen();
+//    console.SetMaxXY(200, 80);
+    terminal.GetMaxXY(X, Y);
+    terminal.SetXY(1,1);
+    terminal.SetForegroundColour(7);
+    terminal.SetBackgroundColour(0);
+
+    terminal.SetForegroundColour(9);
+    terminal.SetBackgroundColour(0);
+    for (int curX = 1; curX <= X; curX++) {
+        terminal.SetXY(curX, 1);
+        terminal.Print("%c", 196);
+        terminal.SetXY(curX, 3);
+        terminal.Print("%c", 196);
+    }
+    terminal.SetForegroundColour(6);
+    terminal.SetXY((X - title.length()) / 2,2);
+    terminal.Print(title);
+    terminal.SetForegroundColour(15);
+    for (int index = 0; index < 256; index++) {
+        terminal.Print("%c",index);
+    }
+
+
+    return 0;
 }

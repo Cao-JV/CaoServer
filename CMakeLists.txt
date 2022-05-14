@@ -12,5 +12,11 @@ project(CaoS)
 
 # add the executable
 include_directories(${PROJECT_SOURCE_DIR} /usr/include)
-add_executable(Server main.cpp)
+find_library(LIBTERMINAL SimpleANSITerminal DIRECTORY ./)
 
+SET( SERVER_EXE Server )
+# add the executable
+add_executable( ${SERVER_EXE}  main.cpp )
+
+TARGET_LINK_LIBRARIES( ${SERVER_EXE}
+                       ${LIBTERMINAL} )
